@@ -1,0 +1,8 @@
+Make sure to have ruby installed
+
+To setup:
+1. run `gem install bundler`
+2. run `bundle install`
+
+To test:
+bundle exec ruby main.rb
