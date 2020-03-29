@@ -1,11 +1,14 @@
 require 'tzinfo'
+require './lib/turnip_bot/store'
 
 module TurnipBot
   class Prices
-    attr_reader :prices
+    attr_reader :prices, :store
 
     def initialize
-      @prices = {}
+      @store = Store.new
+      # Initialize price data with whatever we load
+      @prices = store.load
     end
 
     def add(timestamp, author, price)
@@ -15,6 +18,9 @@ module TurnipBot
 
       @prices[price_key] ||= {}
       @prices[price_key][author] = price
+
+      # Perist data
+      store.save(prices)
 
       puts "#{timestamp.strftime('%m-%d %H:%M')} :: #{author} has recorded a price of #{price}!"
     end
