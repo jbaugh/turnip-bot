@@ -1,16 +1,19 @@
-require 'discordrb'
-require 'yaml'
+require './lib/turnip_bot'
 
-config = YAML.load_file('secrets.yml')
+bot = TurnipBot::Bot.new
+bot.run
 
-bot = Discordrb::Bot.new(token: config['bot_token'])
 
-# bot.message(with_text: 'Ping!') do |event|
-#   event.respond 'Pong!'
-# end
 
-bot.run(true)
+
+
+
+
+# bot.run
 
 # bot.send_message(config['channel_id'], 'turnips are nutritious and delicious!')
 
-bot.stop
+
+# bot.join
+# bot.stop
+
