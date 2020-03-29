@@ -25,6 +25,8 @@ module TurnipBot
 
           prices.add(event.timestamp, author, turnip_price)
 
+          # TODO: Figure out how to pass unicode in
+          event.message.react("🐗")
         else
           # puts "@"*100
           # puts "Error processing event"
