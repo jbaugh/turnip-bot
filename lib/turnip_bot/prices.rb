@@ -1,32 +1,32 @@
 require 'tzinfo'
 
 module TurnipBot
-  class Counts
-    attr_reader :counts
+  class Prices
+    attr_reader :prices
 
     def initialize
-      @counts = {}
+      @prices = {}
     end
 
-    def add(timestamp, author, count)
+    def add(timestamp, author, price)
       timestamp = convert_to_local_time(timestamp)
 
-      count_key = get_counts_key(timestamp)
+      price_key = get_prices_key(timestamp)
 
-      @counts[count_key] ||= {}
-      @counts[count_key][author] = count
+      @prices[price_key] ||= {}
+      @prices[price_key][author] = price
 
-      puts "#{timestamp.strftime('%m-%d %H:%M')} :: #{author} has recorded a count of #{count}!"
+      puts "#{timestamp.strftime('%m-%d %H:%M')} :: #{author} has recorded a price of #{price}!"
     end
 
-    def current_counts
-      key = get_counts_key(convert_to_local_time(Time.now))
-      counts[key] || {} 
+    def current_prices
+      key = get_prices_key(convert_to_local_time(Time.now))
+      prices[key] || {} 
     end
 
     private
 
-    def get_counts_key(time)
+    def get_prices_key(time)
       date_string(time) + "_" + time_of_day(time)
     end
 

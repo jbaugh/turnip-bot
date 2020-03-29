@@ -1,12 +1,12 @@
-require './lib/turnip_bot/counts'
+require './lib/turnip_bot/prices'
 
 module TurnipBot
   class Handler
-    attr_reader :bot, :counts
+    attr_reader :bot, :prices
 
     def initialize(bot)
       @bot = bot
-      @counts = Counts.new
+      @prices = Prices.new
     end
 
     def process
@@ -20,10 +20,10 @@ module TurnipBot
       bot.message(starts_with: /\d{2,}/) do |event|
         val = event.content.match(/\A\d{2,}/)
         if val
-          turnip_count = val[0]
+          turnip_price = val[0]
           author = event.author.username
 
-          counts.add(event.timestamp, author, turnip_count)
+          prices.add(event.timestamp, author, turnip_price)
 
         else
           # puts "@"*100
@@ -34,12 +34,12 @@ module TurnipBot
       end
 
       bot.message(with_text: '!turnip') do |event|
-        current_counts = counts.current_counts
-        if current_counts.empty?
+        current_prices = prices.current_prices
+        if current_prices.empty?
           message = "There are no turnip prices :("  
         else
           messages = ["The most recent prices are:"]
-          counts.current_counts.each do |author, price|
+          prices.current_prices.each do |author, price|
             messages << "  #{author} -> #{price}"
           end
           message = messages.join("\n")
