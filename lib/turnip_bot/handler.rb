@@ -13,13 +13,8 @@ module TurnipBot
       bot.message(start_with: /\d{2,}/) do |event|
         val = event.content.match(/\A\d{2,}/)
         if val
-          turnip_price = val[0]
-          author = event.author.username
-
-          prices.add(event.timestamp, author, turnip_price)
-
-          # TODO: Figure out how to pass unicode in
-          event.message.react("🐗")
+          price = val[0]
+          record_price(event, price)
         else
           puts "@"*100
           puts "Error processing event"
@@ -28,6 +23,13 @@ module TurnipBot
           puts "event.timestamp : #{event.timestamp}"
           puts "@"*100
         end
+      end
+
+      bot.message(start_with: '!turnip') do |event|
+        # Remove any non numbers
+        price = event.content.gsub(/\D/, '')
+        # Make sure the price is a number
+        record_price(event, price) if price.to_i > 0
       end
 
       bot.message(with_text: '!cheapest') do |event|
@@ -48,6 +50,13 @@ module TurnipBot
       bot.message(with_text: '!fact') do |event|
         event.respond 'Turnips are delicious and nutritious!'
       end
+    end
+
+    def record_price(event, price)
+      prices.add(event.timestamp, event.author.username, price.to_i)
+
+      # TODO: Figure out how to pass unicode in
+      event.message.react("🐗")
     end
 
     def determine_prices
