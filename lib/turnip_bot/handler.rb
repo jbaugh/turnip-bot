@@ -50,8 +50,8 @@ module TurnipBot
         event.respond message
       end
 
-      bot.message(with_text: 'turnip') do |event|
-        event.respond 'are delicious and nutritious!'
+      bot.message(with_text: '!fact') do |event|
+        event.respond 'Turnips are delicious and nutritious!'
       end
     end
   end

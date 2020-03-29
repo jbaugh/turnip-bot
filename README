@@ -6,3 +6,11 @@ To setup:
 
 To test:
 bundle exec ruby main.rb
+
+
+TODO:
+1. Persist the data, either in a DB or google sheets
+2. Add more commands for seeing other data
+3. Add better parsers
+4. Add commands to remove/correct data
+5. Add command to add a value for someone else
