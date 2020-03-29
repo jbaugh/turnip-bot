@@ -20,7 +20,7 @@ require 'date'
 #     "Smithie" => 124,
 #   },
 # }
-
+#
 # TurnipBot::Store.new.save(data)
 # TurnipBot::Store.new.load
 
