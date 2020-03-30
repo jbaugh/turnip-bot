@@ -44,11 +44,11 @@ module TurnipBot
       end
 
       bot.message(with_text: '!prices') do |event|
-        event.respond message determine_prices
+        event.respond determine_prices
       end
 
       bot.message(with_text: '!fact') do |event|
-        event.respond 'Turnips are delicious and nutritious!'
+        event.respond random_turnip_fact(event.author.username)
       end
     end
 
@@ -90,6 +90,31 @@ module TurnipBot
         highest = current_prices.max_by{|k, v| v}
         "The current highest price is #{highest[1]} from #{highest[0]}"
       end
+    end
+
+    def random_turnip_fact(username)
+      [
+        'Turnips are delicious and nutritious!',
+        'Turnips are commonly grown in temperate climates worldwide for its white, fleshy taproot.',
+        'There are over 30 varieties of turnips which differ in size, color, flavor and usage.',
+        'Purple-top turnips are the most common type.',
+        'Smaller kinds of turnip are grown for human food. Larger ones are grown to feed livestock.',
+        'The turnip is a hardy biennial plant in the mustard family.',
+        'The turnip root is roughly globular, from 5 to 20 centimetres (2 to 8 in) in diameter, and lacks side roots.',
+        'The heaviest turnip weighed 17.7 kg (39 lb 3 oz)! Wow!',
+        'Turnip greens are a common side dish in southeastern U.S. cooking.',
+        'Turnip roots are excellent source of dietary fiber, vitamin C and vitamin B6, folate, calcium, potassium, and copper.',
+        'Turnip greens are an excellent source of vitamins A and C, as well as a good source of calcium, iron, and riboflavin.',
+        'In Roman times, the turnip was the weapon of choice to hurl at unpopular public figures.',
+        'The Turnip is a hardy plant that has been cultivated for over 4,000 years!',
+        'Andy once stuffed 26 whole turnips in his mouth!',
+        'Wail builds his own turnips.',
+        'Vincent invented turnips.',
+        'If Saul has one more turnip, he could have a heart attack.',
+        'Jacob once survived a month on nothing but turnips.',
+        "#{username} is allergic to turnips!",
+        "#{username} has never tried a turnip!"
+      ].shuffle.first
     end
   end
 end
