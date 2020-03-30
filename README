@@ -1,3 +1,11 @@
+# turnip-bot
+A discord bot for keeping track of turnip prices for Animal Crossing.
+
+The goal of this was to get a bit more familiar with discord bots, and help some friends coordinate playing Animal Crossing.
+
+
+
+
 Make sure to have ruby installed
 
 To setup:
